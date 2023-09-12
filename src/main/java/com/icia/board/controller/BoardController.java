@@ -1,6 +1,7 @@
 package com.icia.board.controller;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+
 @RequestMapping("/board")
 @Controller
 public class BoardController {
@@ -52,14 +54,19 @@ public class BoardController {
         boardService.updateHits(id);
         //데이터 가져오기
         BoardDTO boardDTO = boardService.detail(id);
-        System.out.println("boardTitle" + id);
-        System.out.println("boardDTO : "+boardDTO);
+//        System.out.println("boardTitle" + id);
+//        System.out.println("boardDTO : "+boardDTO);
         model.addAttribute("board", boardDTO);
+        // 첨부된 파일이 있다면 파일 가져오기
+        if (boardDTO.getFileAttached() == 1) {
+            BoardFileDTO boardFileDTO = boardService.findFile(id);
+            model.addAttribute("boardFile", boardFileDTO);
+        }
         return "boardPages/boardDetail";
     }
 
     @GetMapping("/update")
-    public String update(@RequestParam("id") Long id,Model model) {
+    public String update(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.detail(id);
         model.addAttribute("board", boardDTO);
 
@@ -71,12 +78,12 @@ public class BoardController {
         boardService.update(boardDTO);
         System.out.println("boardDTO = " + boardDTO);
         BoardDTO dto = boardService.detail(boardDTO.getId());
-        model.addAttribute("board",dto);
+        model.addAttribute("board", dto);
         return "boardPages/boardDetail";
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id,Model model) {
+    public String delete(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.detail(id);
         model.addAttribute("board", boardDTO);
 

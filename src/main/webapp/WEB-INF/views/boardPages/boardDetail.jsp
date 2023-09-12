@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -34,6 +36,15 @@
             <th>contents</th>
             <td>${board.boardContents}</td>
         </tr>
+        <c:if test="${board.fileAttached==1}">
+            <tr>
+                <th>image</th>
+                <td>
+                    <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}"
+                         alt="" width="100" height="100">
+                </td>
+            </tr>
+        </c:if>
     </table>
     <button onclick="board_list()">목록</button>
     <button onclick="board_update()">수정</button>
