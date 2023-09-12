@@ -23,9 +23,21 @@ public class BoardRepository {
         return sql.selectList("Board.list");
     }
 
-    public BoardDTO detail(int id) {
+    public BoardDTO detail(Long id) {
         return sql.selectOne("Board.detail", id);
     }
 
 
+    public void updateHits(Long id) {
+        sql.update("Board.updateHits",id);
+    }
+
+
+    public void update(BoardDTO boardDTO) {
+        sql.update("Board.update",boardDTO);
+    }
+
+    public void delete(BoardDTO boardDTO) {
+        sql.delete("Board.delete",boardDTO);
+    }
 }

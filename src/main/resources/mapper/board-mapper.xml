@@ -9,11 +9,40 @@
         values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{boardHits}, #{fileAttached})
     </insert>
     <select id="list" resultType="board">
-        select * from board_table
+        select id,
+               boardWriter,
+               boardTitle,
+               date_format(createdAt, "%y-%m-%d %H:%i:%s") as createdAt,
+               boardHits
+        from board_table
     </select>
-    <select id="detail" parameterType="int" resultType="board">
-        select * from board_table where id = #{id}
+    <select id="detail" parameterType="Long" resultType="board">
+        select id,
+               boardWriter,
+               boardTitle,
+               boardContents,
+               fileAttached,
+               boardPass,
+               date_format(createdAt, "%y-%m-%d %H:%i:%s") as createdAt,
+               boardHits
+        from board_table
+        where id = #{id}
     </select>
+    <update id="updateHits" parameterType="Long">
+        update board_table
+        set boardHits = boardHits + 1
+        where id = #{id}
+    </update>
+    <update id="update" parameterType="board">
+        update board_table
+        set boardTitle=#{boardTitle},
+            boardContents=#{boardContents}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="board">
+        delete from board_table where id=#{id}
+    </delete>
 </mapper>
 
 

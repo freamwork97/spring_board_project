@@ -12,7 +12,7 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    public BoardDTO detail(int id) {
+    public BoardDTO detail(Long id) {
         return boardRepository.detail(id);
     }
 
@@ -34,4 +34,16 @@ public class BoardService {
     }
 
 
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
+
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
+
+    public void delete(BoardDTO boardDTO) {
+        boardRepository.delete(boardDTO);
+    }
 }

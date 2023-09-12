@@ -7,6 +7,6 @@
 <body>
 <h2>index.jsp 시작페이지</h2>
 <a href="/board/save">글작성</a>
-<a href="/board/list">목록출력</a>
+<a href="/board/">목록출력</a>
 </body>
 </html>

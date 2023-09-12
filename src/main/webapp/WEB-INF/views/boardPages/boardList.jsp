@@ -19,6 +19,7 @@
         <td>글번호</td>
         <td>작성자</td>
         <td>글제목</td>
+        <td>작성시간</td>
         <td>조회수</td>
     </tr>
     <c:forEach items="${boardList}" var="board">
@@ -26,6 +27,7 @@
             <td>${board.id}</td>
             <td>${board.boardWriter}</td>
             <td><a href="/board?id=${board.id}">${board.boardTitle}</a></td>
+            <td>${board.createdAt}</td>
             <td>${board.boardHits}</td>
         </tr>
     </c:forEach>
