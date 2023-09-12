@@ -58,6 +58,7 @@ public class BoardService {
             // 저장용 이름 만들기
             System.out.println(System.currentTimeMillis());
             String storedFileName = System.currentTimeMillis() + "-" + originalFilename;
+            System.out.println("storedFileName = " + storedFileName);
             // baordFileDTO
             BoardFileDTO boardFileDTO = new BoardFileDTO();
             boardFileDTO.setOriginalFileName(originalFilename);
