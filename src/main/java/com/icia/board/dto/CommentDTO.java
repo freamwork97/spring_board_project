@@ -6,7 +6,7 @@ import lombok.Data;
 public class CommentDTO {
     private Long id;
     private String commentWriter;
-//    private commentContents;
+    private String commentContents;
     private Long boardId;
 //    private Timestamp commentCreatedDate;
 }

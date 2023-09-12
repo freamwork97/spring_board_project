@@ -18,12 +18,13 @@
 
 <%--<h2>boardSave 글작성페이지</h2>--%>
 <div class="container">
-    <form action="/board/save" method="post">
+    <form action="/board/save" method="post" enctype="multipart/form-data">
         <input type="text" name="boardWriter" placeholder="작성자">
         <input type="text" name="boardPass" placeholder="비밀번호">
         <input type="submit" value="등록">
         <hr>
-        <input type="text" name="boardTitle" placeholder="제목"><br>
+        <input type="text" name="boardTitle" placeholder="제목">
+        <input type="file" name="boardFile"><br>
         <textarea name="boardContents" cols="171" rows="10"></textarea>
     </form>
 </div>

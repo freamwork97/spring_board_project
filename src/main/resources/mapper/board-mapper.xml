@@ -4,9 +4,16 @@
 
 <!-- namespace 반드시 작성! -->
 <mapper namespace="Board">
-    <insert id="save" parameterType="board">
-        insert into board_table(boardWriter, boardPass, boardTitle, boardContents, boardHits, fileAttached)
-        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{boardHits}, #{fileAttached})
+    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+        insert into board_table(boardWriter, boardPass, boardTitle, boardContents, fileAttached)
+        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{fileAttached})
+    </insert>
+    <insert id="saveFile" parameterType="boardFile">
+        insert
+        into board_file_table(originalFileName, storedFileName, boardId)
+        values (#{originalFileName},
+                #{storedFileName},
+                #{boardId})
     </insert>
     <select id="list" resultType="board">
         select id,
@@ -41,7 +48,9 @@
     </update>
 
     <delete id="delete" parameterType="board">
-        delete from board_table where id=#{id}
+        delete
+        from board_table
+        where id = #{id}
     </delete>
 </mapper>
 

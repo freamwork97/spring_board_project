@@ -39,6 +39,10 @@
     <button onclick="board_update()">수정</button>
     <button onclick="board_delete()">삭제</button>
 </div>
+<input type="text" name="commentWriter" placeholder="제목">
+<input type="button" value="댓글작성" onclick="comment_fn()"><br>
+<textarea name="commentContents" cols="171" rows="10" placeholder="내용"></textarea>
+
 <%@include file="../component/footer.jsp" %>
 
 </body>
@@ -61,5 +65,10 @@
         const passArea = document.getElementById("pass-check");
         passArea.style.display = "block";
     }
+
+    const comment_fn = () => {
+
+    }
+
 </script>
 </html>
