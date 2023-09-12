@@ -9,8 +9,13 @@
 <html>
 <head>
     <title>비밀번호확인</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+
 </head>
 <body>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
+
 <div id="container">
     <form action="/board/delete" method="post" name="deleteForm">
         <input type="hidden" name="id" value="${board.id}">
@@ -18,6 +23,8 @@
         <input type="button" value="삭제" onclick="delete_fn()">
     </form>
 </div>
+<%@include file="../component/footer.jsp" %>
+
 </body>
 <script>
     const delete_fn = () => {

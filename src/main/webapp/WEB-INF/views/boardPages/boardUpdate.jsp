@@ -13,7 +13,10 @@
 
 </head>
 <body>
-<h2>업데이트</h2>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
+
+<%--<h2>업데이트</h2>--%>
 <div id="container">
     <form action="/board/update" method="post" name="updateForm">
         <input type="hidden" name="id" value="${board.id}">
@@ -25,6 +28,8 @@
         <input type="button" value="수정" onclick="update_fn()">
     </form>
 </div>
+<%@include file="../component/footer.jsp" %>
+
 </body>
 <script>
     const update_fn = () => {

@@ -6,6 +6,9 @@
 
 </head>
 <body>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
+
 <div id="section">
     <table class="table table-dark table-striped">
         <tr>
@@ -36,6 +39,8 @@
     <button onclick="board_update()">수정</button>
     <button onclick="board_delete()">삭제</button>
 </div>
+<%@include file="../component/footer.jsp" %>
+
 </body>
 <script>
     const board_update = () => {
@@ -50,6 +55,11 @@
 
     const board_list = () => {
         location.href = "/board/";
+    }
+
+    const delete_fn = () => {
+        const passArea = document.getElementById("pass-check");
+        passArea.style.display = "block";
     }
 </script>
 </html>

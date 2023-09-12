@@ -13,7 +13,10 @@
 
 </head>
 <body>
-<h2>boardSave 글작성페이지</h2>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
+
+<%--<h2>boardSave 글작성페이지</h2>--%>
 <div class="container">
     <form action="/board/save" method="post">
         <input type="text" name="boardWriter" placeholder="작성자">
@@ -24,6 +27,7 @@
         <textarea name="boardContents" cols="171" rows="10"></textarea>
     </form>
 </div>
+<%@include file="../component/footer.jsp" %>
 
 </body>
 </html>

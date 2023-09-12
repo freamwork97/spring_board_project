@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
+
 <table class="table table-dark table-striped">
     <tr>
         <td>글번호</td>
@@ -32,6 +35,7 @@
         </tr>
     </c:forEach>
 </table>
+<%@include file="../component/footer.jsp" %>
 
 </body>
 </html>
