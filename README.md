@@ -2,8 +2,8 @@
 
 ## Board Project
 1. 프로젝트 기본 정보
-   a. project name: board_20230911
-   b. package: com.icia.board
+   - project name: board_20230911
+   - package: com.icia.board
 2. Class
    - controller
      - HomeController
