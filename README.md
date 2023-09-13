@@ -89,13 +89,13 @@
    를 post 방식으로 보냄.
      - CommentDTO 클래스
 ```java
-    public class CommentDTO {
+public class CommentDTO {
     private Long id;
     private String commentWriter;
-    private commentContents;
+    private String commentContents;
+    private String createdAt;
     private Long boardId;
-    private Timestamp commentCreatedDate;
-    }
+}
 ```
   - CommentService → CommentRepository → comment-mapper를 거쳐서
 comment_table에 저장처리
