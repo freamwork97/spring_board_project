@@ -57,9 +57,7 @@
     <input type="text" id="comment-contents" placeholder="내용 입력">
     <button onclick="comment_write()">댓글작성</button>
 </div>
-<div id="comment-list-area">
 
-</div>
 <div id="comment-list-area">
     <%--댓글 출력될 공간--%>
 </div>
@@ -102,13 +100,13 @@
             },
             success: function (res) {
                 console.log("리턴값: ", res);
-                let output =    "<table id=\"comment-list\">\n" +
+                let output = "<table id=\"comment-list\">\n" +
                     "    <tr>\n" +
                     "        <th>작성자</th>\n" +
                     "        <th>내용</th>\n" +
                     "        <th>작성시간</th>\n" +
                     "    </tr>\n";
-                for(let i in res) {
+                for (let i in res) {
                     output += "    <tr>\n";
                     output += "        <td>" + res[i].commentWriter + "</td>\n";
                     output += "        <td>" + res[i].commentContents + "</td>\n";
