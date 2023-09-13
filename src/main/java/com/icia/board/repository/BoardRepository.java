@@ -49,7 +49,7 @@ public class BoardRepository {
         sql.insert("Board.saveFile", boardFileDTO);
     }
 
-    public BoardFileDTO fildFile(Long boardId) {
-        return sql.selectOne("Board.findFile", boardId);
+    public List<BoardFileDTO> fildFile(Long boardId) {
+        return sql.selectList("Board.findFile", boardId);
     }
 }

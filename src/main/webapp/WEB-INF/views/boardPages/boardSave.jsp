@@ -24,7 +24,7 @@
         <input type="submit" value="등록">
         <hr>
         <input type="text" name="boardTitle" placeholder="제목">
-        <input type="file" name="boardFile"><br>
+        <input type="file" name="boardFile" multiple><br>
         <textarea name="boardContents" cols="171" rows="10"></textarea>
     </form>
 </div>
