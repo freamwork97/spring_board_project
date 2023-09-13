@@ -4,8 +4,11 @@
 <head>
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
 <div id="section">
     <table>
         <tr>
@@ -81,6 +84,8 @@
         </c:choose>
     </div>
 </div>
+<%@include file="../component/footer.jsp" %>
+
 </body>
 <script>
     const comment_write = () => {

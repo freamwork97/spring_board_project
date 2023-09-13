@@ -4,8 +4,11 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
+<%@include file="../component/header.jsp" %>
+<%@include file="../component/nav.jsp" %>
 <div id="section">
     <%-- 검색 창 --%>
     <div class="container" id="search-area">
@@ -91,5 +94,6 @@
         </ul>
     </div>
 </div>
+<%@include file="../component/footer.jsp" %>
 </body>
 </html>

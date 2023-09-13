@@ -1,34 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2023-09-11
-  Time: 오전 9:20
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>boardSave 글작성페이지</title>
+    <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
 <%@include file="../component/nav.jsp" %>
-
-<%--<h2>boardSave 글작성페이지</h2>--%>
-<div class="container">
+<div id="section">
     <form action="/board/save" method="post" enctype="multipart/form-data">
-        <input type="text" name="boardWriter" placeholder="작성자">
-        <input type="text" name="boardPass" placeholder="비밀번호">
-        <input type="submit" value="등록">
-        <hr>
-        <input type="text" name="boardTitle" placeholder="제목">
-        <input type="file" name="boardFile" multiple><br>
-        <textarea name="boardContents" cols="171" rows="10"></textarea>
+        <input type="text" name="boardTitle" placeholder="제목을 입력하세요"> <br>
+        <input type="text" name="boardWriter" placeholder="작성자를 입력하세요"> <br>
+        <input type="text" name="boardPass" placeholder="비밀번호를 입력하세요"> <br>
+        <textarea name="boardContents" cols="30" rows="10"></textarea> <br>
+        <input type="file" name="boardFile" multiple> <br>
+        <input type="submit" value="작성">
     </form>
 </div>
 <%@include file="../component/footer.jsp" %>
-
 </body>
 </html>

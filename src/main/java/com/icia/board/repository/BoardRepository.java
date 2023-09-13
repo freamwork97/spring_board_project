@@ -14,9 +14,6 @@ public class BoardRepository {
     @Autowired
     private SqlSessionTemplate sql;
 
-    //    public int save(BoardDTO boardDTO) {
-//        return sql.insert("Board.save", boardDTO);
-//    }
     public BoardDTO save(BoardDTO boardDTO) {
         System.out.println("insert 전 boardDTO = " + boardDTO);
         sql.insert("Board.save", boardDTO);
@@ -24,33 +21,31 @@ public class BoardRepository {
         return boardDTO;
     }
 
-    public List<BoardDTO> list() {
-        return sql.selectList("Board.list");
+    public List<BoardDTO> findAll() {
+        return sql.selectList("Board.findAll");
     }
-
-    public BoardDTO detail(Long id) {
-        return sql.selectOne("Board.detail", id);
-    }
-
 
     public void updateHits(Long id) {
         sql.update("Board.updateHits", id);
     }
 
+    public BoardDTO findById(Long id) {
+        return sql.selectOne("Board.findById", id);
+    }
 
     public void update(BoardDTO boardDTO) {
         sql.update("Board.update", boardDTO);
     }
 
-    public void delete(BoardDTO boardDTO) {
-        sql.delete("Board.delete", boardDTO);
+    public void delete(Long id) {
+        sql.delete("Board.delete", id);
     }
 
     public void saveFile(BoardFileDTO boardFileDTO) {
         sql.insert("Board.saveFile", boardFileDTO);
     }
 
-    public List<BoardFileDTO> fildFile(Long boardId) {
+    public List<BoardFileDTO> findFile(Long boardId) {
         return sql.selectList("Board.findFile", boardId);
     }
 
@@ -65,5 +60,19 @@ public class BoardRepository {
     public List<BoardDTO> searchList(Map<String, String> searchParam) {
         return sql.selectList("Board.search", searchParam);
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
