@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
+
     public void save(BoardDTO boardDTO) throws IOException {
         /*
             - 파일 있다.
@@ -40,7 +42,7 @@ public class BoardService {
             // 게시글 저장 후 id값 활용을 위해 리턴 받음.
             BoardDTO savedBoard = boardRepository.save(boardDTO);
             // 파일이 여러개 이기 때문에 반복문으로 파일 하나씩 꺼내서 저장 처리
-            for(MultipartFile boardFile: boardDTO.getBoardFile()) {
+            for (MultipartFile boardFile : boardDTO.getBoardFile()) {
                 // 파일만 따로 가져오기
                 // MultipartFile boardFile = boardDTO.getBoardFile();
                 // 파일 이름 가져오기
@@ -103,9 +105,9 @@ public class BoardService {
         // 전체 글 갯수 조회
         int boardCount = boardRepository.boardCount();
         // 전체 페이지 갯수 계산
-        int maxPage = (int) (Math.ceil((double)boardCount / pageLimit));
+        int maxPage = (int) (Math.ceil((double) boardCount / pageLimit));
         // 시작 페이지 값 계산(1, 4, 7, 10 ~~)
-        int startPage = (((int)(Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
         // 마지막 페이지 값 계산(3, 6, 9, 12 ~~)
         int endPage = startPage + blockLimit - 1;
         // 전체 페이지 갯수가 계산한 endPage 보다 작을 때는 endPage 값을 maxPage 값과 같게 세팅
@@ -125,10 +127,16 @@ public class BoardService {
         boardRepository.save(boardDTO);
     }
 
-    public List<BoardDTO> searchList(String q, String type) {
-        Map<String, String> searchParam = new HashMap<>();
-        searchParam.put("q", q);
-        searchParam.put("type", type);
+    public List<BoardDTO> searchList(String q, String type, int page) {
+        Map<String, Object> searchParam = new HashMap<>();
+        searchParam.put("q", q); // 검색어
+        searchParam.put("type", type); // 어떠한 컬럼인가
+
+        int pageLimit = 7; // 한페이지당 보여줄 글 갯수
+        int pagingStart = (page - 1) * pageLimit; // 요청한 페이지에 보여줄 첫번째 게시글의 순서
+        searchParam.put("start", pagingStart);
+        searchParam.put("limit", pageLimit);
+
         return boardRepository.searchList(searchParam);
     }
 }

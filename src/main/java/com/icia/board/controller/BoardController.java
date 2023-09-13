@@ -51,8 +51,9 @@ public class BoardController {
     @GetMapping("/search")
     public String search(@RequestParam("q") String q,
                          @RequestParam("type") String type,
+                         @RequestParam(value = "page", required = false, defaultValue = "1") int page, // 검색결과에 대한 페이지
                          Model model) {
-        List<BoardDTO> boardDTOList = boardService.searchList(q, type);
+        List<BoardDTO> boardDTOList = boardService.searchList(q, type, page);
         model.addAttribute("boardList", boardDTOList);
         return "boardPages/boardList";
     }
