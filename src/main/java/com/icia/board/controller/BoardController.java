@@ -3,6 +3,7 @@ package com.icia.board.controller;
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.dto.BoardFileDTO;
 import com.icia.board.dto.CommentDTO;
+import com.icia.board.dto.PageDTO;
 import com.icia.board.service.BoardService;
 import com.icia.board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +45,27 @@ public class BoardController {
     }
 
 
-    @GetMapping("/")
-    public String list(Model model) {
+    @GetMapping("/list")
+    public String list(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                       Model model) {
         List<BoardDTO> boardDTOList = boardService.list();
         System.out.println("boardDTOList : " + boardDTOList);
         model.addAttribute("boardList", boardDTOList);
+
+        PageDTO pageDTO = boardService.pageNumber(page);
+        model.addAttribute("paging", pageDTO);
         return "boardPages/boardList";
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("q") String q,
+                         @RequestParam("type") String type,
+                         Model model) {
+        List<BoardDTO> boardDTOList = boardService.searchList(q, type);
+        model.addAttribute("boardList", boardDTOList);
+        return "boardPages/boardList";
+    }
+
 
     @GetMapping
     public String detial(@RequestParam("id") Long id, Model model) {
@@ -106,6 +121,19 @@ public class BoardController {
     public String delete(@ModelAttribute BoardDTO boardDTO) {
         boardService.delete(boardDTO);
         return "redirect:/board/";
+    }
+
+    @GetMapping("/sample")
+    public String sampleData() {
+        for (int i = 1; i <= 20; i++) {
+            BoardDTO boardDTO = new BoardDTO();
+            boardDTO.setBoardWriter("aa");
+            boardDTO.setBoardTitle("title" + i);
+            boardDTO.setBoardContents("contents" + i);
+            boardDTO.setBoardPass("pass" + i);
+            boardService.sampleData(boardDTO);
+        }
+        return "redirect:/board/list";
     }
 
 }
