@@ -60,10 +60,30 @@
 
 <div id="comment-list-area">
     <%--댓글 출력될 공간--%>
+    <c:choose>
+        <c:when test="${commentList==null}">
+            <h3>작성된 댓글이 없어요</h3>
+        </c:when>
+        <c:otherwise>
+            <table id="comment-list">
+                <tr>
+                    <th>작성자</th>
+                    <th>내용</th>
+                    <th>작성시간</th>
+                </tr>
+                <c:forEach items="${commentList}" var="comment">
+                    <tr>
+                        <td>${comment.commentWriter}</td>
+                        <td>${comment.commentContents}</td>
+                        <td>${comment.createdAt}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
 </div>
 
 <%@include file="../component/footer.jsp" %>
-
 </body>
 <script>
     const board_update = () => {
@@ -123,6 +143,5 @@
             }
         });
     }
-
 </script>
 </html>
