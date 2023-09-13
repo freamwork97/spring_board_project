@@ -53,9 +53,11 @@
     <button onclick="board_delete()">삭제</button>
 </div>
 <div id="comment-write-area">
-    <input type="text" name="commentWriter" id="comment-Writer" placeholder="작성자">
-    <input type="text" name="commentContents" id="comment-Contents" placeholder="내용"> <br>
-    <button onclick="commentWrite()">댓글작성</button>
+    <input type="text" id="comment-writer" placeholder="작성자 입력">
+    <input type="text" id="comment-contents" placeholder="내용 입력">
+    <button onclick="comment_write()">댓글작성</button>
+</div>
+<div id="comment-list-area">
 
 </div>
 <div id="comment-list-area">
@@ -85,11 +87,11 @@
         passArea.style.display = "block";
     }
 
-    const commentWrite = () => {
-        const commentWriter = document.getElementById("comment-Writer").value();
-        const commentContents = document.querySelector("#comment-Contents").value();
+    const comment_write = () => {
+        const commentWriter = document.getElementById("comment-writer").value;
+        const commentContents = document.querySelector("#comment-contents").value;
         const boardId = '${board.id}';
-        const result = document.getElementById("comment-list-area")
+        const result = document.getElementById("comment-list-area");
         $.ajax({
             type: "post",
             url: "/comment/save",
@@ -99,24 +101,27 @@
                 boardId: boardId
             },
             success: function (res) {
-                console.log("리턴값: ", res)
-                let output = "<table id=\"comment-list\">\n" +
+                console.log("리턴값: ", res);
+                let output =    "<table id=\"comment-list\">\n" +
                     "    <tr>\n" +
                     "        <th>작성자</th>\n" +
                     "        <th>내용</th>\n" +
                     "        <th>작성시간</th>\n" +
                     "    </tr>\n";
-                for (let i in res) {
-                    output += "    <tr>\n" ;
-                    output += "        <td></td>\n" ;
-                    output += "        <td></td>\n" ;
-                    output += "        <td></td>\n" ;
-                    output += "    </tr>\n" ;
+                for(let i in res) {
+                    output += "    <tr>\n";
+                    output += "        <td>" + res[i].commentWriter + "</td>\n";
+                    output += "        <td>" + res[i].commentContents + "</td>\n";
+                    output += "        <td>" + res[i].createdAt + "</td>\n";
+                    output += "    </tr>\n";
                 }
-
+                output += "</table>";
+                result.innerHTML = output;
+                document.getElementById("comment-writer").value = "";
+                document.getElementById("comment-contents").value = "";
             },
             error: function () {
-                console.log("댓글작성실패");
+                console.log("댓글 작성 실패");
             }
         });
     }
