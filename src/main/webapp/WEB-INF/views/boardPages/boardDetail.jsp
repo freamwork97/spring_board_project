@@ -5,7 +5,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <%@include file="../component/header.jsp" %>
@@ -52,9 +52,15 @@
     <button onclick="board_update()">수정</button>
     <button onclick="board_delete()">삭제</button>
 </div>
-<input type="text" name="commentWriter" placeholder="제목">
-<input type="button" value="댓글작성" onclick="comment_fn()"><br>
-<textarea name="commentContents" cols="171" rows="10" placeholder="내용"></textarea>
+<div id="comment-write-area">
+    <input type="text" name="commentWriter" id="comment-Writer" placeholder="작성자">
+    <input type="text" name="commentContents" id="comment-Contents" placeholder="내용"> <br>
+    <button onclick="commentWrite()">댓글작성</button>
+
+</div>
+<div id="comment-list-area">
+    <%--댓글 출력될 공간--%>
+</div>
 
 <%@include file="../component/footer.jsp" %>
 
@@ -79,8 +85,40 @@
         passArea.style.display = "block";
     }
 
-    const comment_fn = () => {
+    const commentWrite = () => {
+        const commentWriter = document.getElementById("comment-Writer").value();
+        const commentContents = document.querySelector("#comment-Contents").value();
+        const boardId = '${board.id}';
+        const result = document.getElementById("comment-list-area")
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            data: {
+                commentWriter: commentWriter,
+                commentContents: commentContents,
+                boardId: boardId
+            },
+            success: function (res) {
+                console.log("리턴값: ", res)
+                let output = "<table id=\"comment-list\">\n" +
+                    "    <tr>\n" +
+                    "        <th>작성자</th>\n" +
+                    "        <th>내용</th>\n" +
+                    "        <th>작성시간</th>\n" +
+                    "    </tr>\n";
+                for (let i in res) {
+                    output += "    <tr>\n" ;
+                    output += "        <td></td>\n" ;
+                    output += "        <td></td>\n" ;
+                    output += "        <td></td>\n" ;
+                    output += "    </tr>\n" ;
+                }
 
+            },
+            error: function () {
+                console.log("댓글작성실패");
+            }
+        });
     }
 
 </script>

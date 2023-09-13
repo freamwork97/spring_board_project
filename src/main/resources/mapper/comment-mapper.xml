@@ -4,7 +4,21 @@
 
 <!-- namespace 반드시 작성! -->
 <mapper namespace="Comment">
+    <insert id="save" parameterType="comment">
+        insert into comment_table(commentWriter, commentContents, boardId)
+        values (#{commentWriter}, #{commentContents}, #{boardId})
+    </insert>
 
+    <select id="list" parameterType="Long" resultType="comment">
+        select id,
+               commentWriter,
+               commentContents,
+               date_format(createdAt, "%y-%m-%d %H:%i:%s") as createdAt,
+               boardId
+        from comment_table
+        where boardId = #{boardId}
+        order by id desc
+    </select>
 
 </mapper>
 
