@@ -55,6 +55,9 @@ public class BoardController {
                          Model model) {
         List<BoardDTO> boardDTOList = boardService.searchList(q, type, page);
         model.addAttribute("boardList", boardDTOList);
+
+        PageDTO pageDTO = boardService.searchPageNumber(q, type, page);
+        model.addAttribute("paging",pageDTO);
         return "boardPages/boardList";
     }
 
